@@ -29,5 +29,7 @@ def name(gender):
         #return random female name
         return names["female"][rand(0, l)]
 
-def ptrait():
-    return rand(0, 100)
+def randint(min, max):
+    #just random 0 - 100 for traits
+    return rand(min, max)
+
