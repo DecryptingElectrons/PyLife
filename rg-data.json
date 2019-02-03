@@ -1,0 +1,28 @@
+{
+"genders":["male", "female"], 
+"names":
+    {"male":
+        ["Ceri Gregory",
+        "Jokubas Douglas",
+        "Talha Franco",
+        "Deen King",
+        "Karter Rosario",
+        "Willow Gould",
+        "Anis Bauer",
+        "Rayyan Melton",
+        "Kiaan Healy",
+        "Nyah Barrow"],
+    "female":
+        ["Chelsea Bonner",
+        "Ashlea Kaur",
+        "Patience Glover",
+        "Annie Pierce",
+        "Juliet Senior",
+        "Ella-Mai Callaghan",
+        "Ashanti Allman",
+        "Keanu Hurst",
+        "Indigo Paine",
+        "Lillia Thompson"]
+
+    }
+}
