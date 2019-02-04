@@ -40,6 +40,8 @@ class player:
         self.age += 1
         self.eventhandler.new_event_log("Age: %i"%(self.age))
 
+        self.ptraits["happiness"] -= 1
+
         #try to kill the player by thier own actions
         for dp in self.death_possibilities:
             #chance of death is randomized for thousandths
