@@ -24,5 +24,13 @@
         "Indigo Paine",
         "Lillia Thompson"]
 
-    }
+    },
+    "acquaintance_names":
+    [
+        "buddy",
+        "friend",
+        "guy",
+        "pal",
+        "acquaintance"
+    ]
 }

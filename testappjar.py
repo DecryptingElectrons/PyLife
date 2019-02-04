@@ -1,5 +1,6 @@
 from appJar import gui
 from player import player
+from event_handler import event
 
 class myapp:
     def __init__(self):
@@ -18,12 +19,31 @@ class myapp:
         self.add_unshown_events()
     def showstats(self):
         self.app.addListItem("event-log", str(vars(self.p)))
-    def add_unshown_events(self):
-        for event in self.p.eventhandler.get_unshown():
-            self.app.addListItem("event-log", event["message"])
+
+
+    def check_option_input(self, event):
+        answer = self.app.stringBox(event.event.name, event.event.prompt + " " + str(event.event.options) + "?")
+        print(answer)
+        while(answer not in event.event.options):
+            answer = event.event.do(self.app.stringBox(event.event.name, event.event.prompt + " " + str(event.event.options) + "?"), self.p)
         
-        if(event["interact"]):
-            event["event"].do(self.app.stringBox(event["event"].name, event["event"].prompt + " " + str(event["event"].options) + "?"), self.p)
+        return answer
+                
+   
+    def add_unshown_events(self):
+        newmessage = False
+        
+        for event in self.p.eventhandler.get_unshown():
+            self.app.addListItem("event-log", event.message)
+            if(event.interact):
+                answer = self.check_option_input(event)
+                event.event.do(answer, self.p)
+                self.p.eventhandler.new_event_log(event.get_option_prompt(answer))
+                newmessage = True
+
+        if(newmessage): self.add_unshown_events()
+                
+        
 
     def age(self):
         self.p.ageforward()

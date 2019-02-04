@@ -8,16 +8,17 @@ class event_handler:
         self.shown_logs = []
         self.id = 0
 
-    def new_event_log(self, log_message, requiresinteract = False, event = None):
-        self.event_log.append({"event":event, "message":log_message, "interact":requiresinteract, "id":self.id})
+    def new_event_log(self, log_message, requiresinteract = False, eventin = None):
+        event_to_log = event(log_message, self.id, requiresinteract, eventin)
+        self.event_log.append(event_to_log)
         self.id += 1
 
     def get_unshown(self):
         out = []
         for event in self.event_log:
-            if(not event["id"] in self.shown_logs):
+            if(not event.id in self.shown_logs):
                 out.append(event)
-                self.shown_logs.append(event["id"])
+                self.shown_logs.append(event.id)
         return out
 
     def randevent(self):
@@ -26,7 +27,15 @@ class event_handler:
             if(inspect.isclass(obj)):
                 classes.append(obj)
         
-        event = classes[rg.randint(0, len(classes)-1)]()
+        eventrand = classes[rg.randint(0, len(classes)-1)]()
         
-        return event
-        
+        return eventrand
+class event:
+    def __init__(self, message, id, requiresinteract, event):
+        self.message = message
+        self.interact = requiresinteract
+        self.event = event
+        self.id = id
+
+    def get_option_prompt(self, answer):
+        return self.event.option_prompts[self.event.options.index(answer)]

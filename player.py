@@ -19,8 +19,8 @@ class player:
             "intelligence":rg.randint(0, 30)
         }
         self.death_possibilities = [
-            {"name":"heart_attack", "chance":0},
-            {"name":"lung_disease", "chance":0}
+            {"name":"heart attack", "chance":0},
+            {"name":"lung disease", "chance":0}
         ]
         self.sexuality = None
         self.alive = True
@@ -33,6 +33,9 @@ class player:
         self.eventhandler.new_event_log("You are %s and your name is %s"%(self.gender, self.name))
     
     def ageforward(self):
+        if(not self.alive):
+            self.eventhandler.new_event_log("dead")
+            return None
         #really technically the -main- code
         self.age += 1
         self.eventhandler.new_event_log("Age: %i"%(self.age))
@@ -45,10 +48,10 @@ class player:
             #higher the number(per death possibility), greater the chance of death
             if(deathchance < dp["chance"]):
                 self.alive = False
-                self.eventhandler.new_event_log("dead")
+                self.eventhandler.new_event_log("dead - %s"%(dp["name"]))
         
         eventchance = rg.rand(0, 18)
 
         if(eventchance == 4):
             event = self.eventhandler.randevent()
-            self.eventhandler.new_event_log(event.prompt, requiresinteract=True,event=event)
+            self.eventhandler.new_event_log(event.prompt, requiresinteract=True, eventin=event)

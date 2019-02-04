@@ -16,20 +16,17 @@ def name(gender):
     names = read_data()["names"]
 
     if(gender == "male"):
-        #figure out how many male name there are
-        l = len(names["male"])-1
-
         #return random male name
-        return names["male"][rand(0, l)]
+        return names["male"][rand(0, len(names["male"])-1)]
 
     elif(gender == "female"):
-        #figure out how many female name there are
-        l = len(names["female"])-1
-
         #return random female name
-        return names["female"][rand(0, l)]
+        return names["female"][rand(0, len(names["female"])-1)]
 
 def randint(min, max):
     #just random 0 - 100 for traits
     return rand(min, max)
 
+def acquaintance_name():
+    names = read_data()["acquaintance_names"]
+    return names[rand(0, len(names)-1)]
